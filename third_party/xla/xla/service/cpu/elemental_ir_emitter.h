@@ -63,6 +63,9 @@ class CpuElementalIrEmitter final : public ElementalIrEmitter {
   absl::StatusOr<llvm::Value*> EmitSinh(PrimitiveType prim_type,
                                         llvm::Value* value) override;
 
+  absl::StatusOr<llvm::Value*> EmitCosh(PrimitiveType prim_type,
+                                        llvm::Value* value) override;
+
   absl::StatusOr<llvm::Value*> EmitErf(PrimitiveType prim_type,
                                        llvm::Value* value) override;
 
