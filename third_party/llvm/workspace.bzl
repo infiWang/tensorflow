@@ -22,6 +22,9 @@ def repo(name):
             "//third_party/llvm:mathextras.patch",
             "//third_party/llvm:temporary.patch",
             "//third_party/llvm:toolchains.patch",
+            "//third_party/llvm:adt_smallvector_cstdint.patch",
+            "//third_party/llvm:x86mctargetdesc_cstdint.patch",
+            "//third_party/llvm:mlirdialect_linalg_transform_hoistpadding_cstdint.patch",
         ],
         link_files = {"//third_party/llvm:run_lit.sh": "mlir/run_lit.sh"},
     )

@@ -1,0 +1,13 @@
+diff --git a/mlir/include/mlir/Dialect/Linalg/Transforms/HoistPadding.h b/mlir/include/mlir/Dialect/Linalg/Transforms/HoistPadding.h
+index 000000000000..111111111111 100644
+--- a/mlir/include/mlir/Dialect/Linalg/Transforms/HoistPadding.h
++++ b/mlir/include/mlir/Dialect/Linalg/Transforms/HoistPadding.h
+@@ -9,6 +9,7 @@
+ #ifndef MLIR_DIALECT_LINALG_TRANSFORMS_HOISTPADDING_H
+ #define MLIR_DIALECT_LINALG_TRANSFORMS_HOISTPADDING_H
+ 
++#include <cstdint>
+ #include "mlir/Support/LogicalResult.h"
+ 
+ namespace mlir {
+ class Value;
