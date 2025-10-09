@@ -1,0 +1,15 @@
+diff --git a/bazel/grpc_deps.bzl b/bazel/grpc_deps.bzl
+index c2f2f43820..18e53cd681 100644
+--- a/bazel/grpc_deps.bzl
++++ b/bazel/grpc_deps.bzl
+@@ -242,8 +242,8 @@ def grpc_deps():
+     if "io_bazel_rules_go" not in native.existing_rules():
+         http_archive(
+             name = "io_bazel_rules_go",
+-            urls = ["https://github.com/bazelbuild/rules_go/releases/download/0.18.5/rules_go-0.18.5.tar.gz"],
+-            sha256 = "a82a352bffae6bee4e95f68a8d80a70e87f42c4741e6a448bec11998fcc82329",
++            urls = ["https://github.com/bazelbuild/rules_go/releases/download/0.27.0/rules_go-0.27.0.tar.gz"],
++            sha256 = "69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b",
+         )
+ 
+     if "build_bazel_rules_apple" not in native.existing_rules():
