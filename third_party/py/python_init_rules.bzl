@@ -15,5 +15,6 @@ def python_init_rules():
             Label("//third_party/py:rules_python3.patch"),
             Label("//third_party/py:rules_python_riscv64_toolchain.patch"),
             Label("//third_party/py:rules_python_riscv64_pypi.patch"),
+            Label("//third_party/py:rules_python_riscv64_lift_timeout.patch"),
         ],
     )
