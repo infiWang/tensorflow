@@ -1,0 +1,1896 @@
+From 73c131f450eb144da2e8cc068a12abac2671d919 Mon Sep 17 00:00:00 2001
+From: gns <plct+tensorflow@infi.wang>
+Date: Mon, 13 Oct 2025 17:10:11 +0800
+Subject: [PATCH] misc: add missing cstdint header
+
+---
+ backends/common/lib/compat/eigen/kernels/cpu_kernels.cc        | 2 ++
+ backends/common/lib/compat/eigen/kernels/matmul.cc             | 2 ++
+ backends/common/lib/compat/eigen/kernels/zero_padding.h        | 2 ++
+ backends/common/lib/compat/eigen/ops/cpu_ops.cc                | 1 +
+ backends/common/lib/ops/test/metadata/test_ops.cc              | 2 ++
+ backends/common/lib/ops/tf/metadata_functions.cc               | 2 ++
+ backends/cpu/cpp_tests/ops/tf/buffer_forwarding_test.cc        | 2 ++
+ backends/cpu/include/tfrt/cpu/core_runtime/cpu_op_registry.h   | 1 +
+ backends/cpu/lib/kernels/cpu_kernels.h                         | 1 +
+ backends/cpu/lib/kernels/image/image_kernels.cc                | 1 +
+ backends/cpu/lib/kernels/image/jpeg/jpeg_handle.cc             | 2 ++
+ backends/cpu/lib/kernels/image/jpeg/jpeg_mem.cc                | 1 +
+ backends/cpu/lib/kernels/image/jpeg/jpeg_mem.h                 | 1 +
+ backends/cpu/lib/kernels/image/resize_bilinear_op.cc           | 2 ++
+ backends/cpu/lib/kernels/proto/proto_kernels.cc                | 2 ++
+ backends/cpu/lib/kernels/tile_kernel.cc                        | 2 ++
+ backends/cpu/lib/ops/test/btf_kernels.cc                       | 2 ++
+ backends/cpu/lib/ops/test/coo_host_tensor_kernels.cc           | 2 ++
+ backends/cpu/lib/ops/test/example_ops.cc                       | 2 ++
+ backends/cpu/lib/ops/test/resnet_tensor_kernels.cc             | 1 +
+ backends/cpu/lib/ops/tf/cpu_ops.cc                             | 2 ++
+ backends/cpu/lib/ops/tf/matmul_fusion_ops.cc                   | 1 +
+ backends/cpu/lib/ops/tf/matmul_ops.cc                          | 1 +
+ backends/cpu/lib/ops/tf/shape_ops.cc                           | 1 +
+ backends/cpu/lib/ops/tf/type_dispatch.h                        | 2 ++
+ cpp_tests/bef/bef_test.cc                                      | 2 ++
+ cpp_tests/bef/kernel_test.cc                                   | 2 ++
+ cpp_tests/bef/span_test.cc                                     | 1 +
+ cpp_tests/bef_converter/bef_attr_emitter_test.cc               | 2 ++
+ cpp_tests/bef_converter/bef_attr_reader_test.cc                | 1 +
+ cpp_tests/core_runtime/driver_test.cc                          | 1 +
+ cpp_tests/dtype/dtype_test.cc                                  | 2 ++
+ cpp_tests/host_context/host_buffer_test.cc                     | 2 ++
+ cpp_tests/host_context/parallel_for_test.cc                    | 1 +
+ cpp_tests/support/bef_reader_test.cc                           | 1 +
+ cpp_tests/support/crc32c_test.cc                               | 2 ++
+ cpp_tests/support/dense_host_tensor_test.cc                    | 1 +
+ cpp_tests/support/map_by_type_test.cc                          | 2 ++
+ cpp_tests/support/ref_count_test.cc                            | 2 ++
+ cpp_tests/support/variant_test.cc                              | 2 ++
+ cpp_tests/tensor/btf_test.cc                                   | 2 ++
+ cpp_tests/tensor/tensor_test.cc                                | 1 +
+ cpp_tests/utils/kernel_runner_test.cc                          | 2 ++
+ include/tfrt/bef/bef.h                                         | 1 +
+ include/tfrt/bef/bef_location.h                                | 1 +
+ include/tfrt/bef/bef_reader.h                                  | 1 +
+ include/tfrt/bef/kernel.h                                      | 2 ++
+ include/tfrt/bef_converter/bef_attr_encoder.h                  | 2 ++
+ include/tfrt/bef_converter/bef_emitter.h                       | 2 ++
+ include/tfrt/bef_converter/bef_to_mlir.h                       | 2 ++
+ include/tfrt/bef_executor/bef_file.h                           | 1 +
+ include/tfrt/compiler/opdefs/tfrt_traits.h                     | 2 ++
+ include/tfrt/compiler/stream_analysis.h                        | 1 +
+ include/tfrt/core_runtime/op_attr_type.h                       | 1 +
+ include/tfrt/core_runtime/opdefs/attributes.h                  | 2 ++
+ include/tfrt/core_runtime/tensor_handle.h                      | 1 +
+ include/tfrt/dtype/quantized_types.h                           | 2 ++
+ include/tfrt/host_context/attribute_utils.h                    | 1 +
+ include/tfrt/host_context/execution_context.h                  | 1 +
+ include/tfrt/host_context/host_buffer.h                        | 2 ++
+ include/tfrt/host_context/kernel_frame.h                       | 1 +
+ include/tfrt/host_context/kernel_utils.h                       | 1 +
+ include/tfrt/host_context/parallel_for.h                       | 1 +
+ include/tfrt/host_context/sync_kernel_frame.h                  | 1 +
+ include/tfrt/support/bf16.h                                    | 2 ++
+ include/tfrt/support/crc32c.h                                  | 1 +
+ include/tfrt/support/forward_decls.h                           | 1 +
+ include/tfrt/support/fp16.h                                    | 2 ++
+ include/tfrt/support/hash_util.h                               | 2 ++
+ include/tfrt/support/logging.h                                 | 2 ++
+ include/tfrt/support/philox_random.h                           | 1 +
+ include/tfrt/support/raw_coding.h                              | 1 +
+ include/tfrt/support/string_util.h                             | 1 +
+ include/tfrt/support/thread_environment_std.h                  | 1 +
+ include/tfrt/support/type_id.h                                 | 1 +
+ include/tfrt/support/variant.h                                 | 1 +
+ include/tfrt/tensor/dense_view.h                               | 2 ++
+ include/tfrt/tensor/tensor_type_registration.h                 | 2 ++
+ include/tfrt/utils/kernel_runner.h                             | 1 +
+ lib/basic_kernels/boolean_kernels.cc                           | 2 ++
+ lib/basic_kernels/control_flow_kernels.cc                      | 1 +
+ lib/basic_kernels/integer_kernels.cc                           | 2 ++
+ lib/bef/bef_location.cc                                        | 1 +
+ lib/bef_converter/bef_emitter.cc                               | 2 ++
+ lib/bef_converter/bef_to_mlir/bef_attr_reader.cc               | 2 ++
+ lib/bef_converter/bef_to_mlir/bef_attr_reader.h                | 2 ++
+ lib/bef_converter/bef_to_mlir/bef_location_reader.h            | 2 ++
+ lib/bef_converter/bef_to_mlir/bef_to_mlir.cc                   | 1 +
+ lib/bef_converter/bef_to_mlir/bef_to_mlir_translate.cc         | 3 +++
+ lib/bef_converter/mlir_to_bef/bef_attr_emitter.cc              | 2 ++
+ lib/bef_converter/mlir_to_bef/bef_compilation_units.cc         | 1 +
+ lib/bef_converter/mlir_to_bef/bef_compilation_units.h          | 1 +
+ lib/bef_converter/mlir_to_bef/bef_location_emitter.cc          | 2 ++
+ lib/bef_converter/mlir_to_bef/bef_location_emitter.h           | 2 ++
+ lib/bef_converter/mlir_to_bef/bef_string_emitter.cc            | 2 ++
+ lib/bef_converter/mlir_to_bef/mlir_to_bef.cc                   | 1 +
+ lib/bef_executor/bef_file.cc                                   | 1 +
+ lib/bef_executor/bef_file_impl.h                               | 1 +
+ lib/compiler/stream_analysis.cc                                | 1 +
+ lib/core_runtime/kernels.cc                                    | 2 ++
+ lib/core_runtime/logging_op_handler.cc                         | 1 +
+ lib/core_runtime/op_attrs.cc                                   | 2 ++
+ lib/core_runtime/opdefs/core_runtime.cc                        | 2 ++
+ lib/core_runtime/opdefs/corert_utils.cc                        | 2 ++
+ lib/core_runtime/tensor_handle.cc                              | 2 ++
+ lib/io/posix_file_system.cc                                    | 1 +
+ lib/io/windows_file_system.cc                                  | 1 +
+ lib/support/crc32c.cc                                          | 2 ++
+ lib/support/hash_util.cc                                       | 2 ++
+ lib/support/logging.cc                                         | 1 +
+ lib/support/random_util.cc                                     | 1 +
+ lib/support/string_util.cc                                     | 2 ++
+ lib/tensor/btf.cc                                              | 2 ++
+ lib/tensor/btf_util.cc                                         | 1 +
+ lib/tensor/coo_host_tensor.cc                                  | 2 ++
+ lib/tensor/coo_host_tensor_kernels.cc                          | 2 ++
+ lib/tensor/dense_host_tensor.cc                                | 1 +
+ lib/tensor/dense_host_tensor_kernels.cc                        | 1 +
+ lib/tensor/scalar_host_tensor.cc                               | 1 +
+ lib/tensor/tensor_serialize_utils.cc                           | 2 ++
+ lib/tensor/tensor_shape.cc                                     | 1 +
+ lib/tensor/tensor_type_registration.cc                         | 1 +
+ lib/test_kernels/async_kernels.cc                              | 1 +
+ lib/test_kernels/async_test_kernels.cc                         | 1 +
+ lib/test_kernels/atomic_test_kernels.cc                        | 1 +
+ lib/test_kernels/benchmark_kernels.cc                          | 1 +
+ lib/test_kernels/simple_kernels.cc                             | 1 +
+ lib/test_kernels/simple_test_kernels.cc                        | 2 ++
+ lib/test_kernels/test_native_functions.cc                      | 2 ++
+ lib/test_kernels/tutorial_kernels.cc                           | 1 +
+ lib/utils/kernel_runner.cc                                     | 1 +
+ mlir_tests/benchmarks/basic_benchmark_test.cc                  | 2 ++
+ mlir_tests/mlir_runner_util_test.cc                            | 2 ++
+ .../cpp_tests/multi_threaded_work_queue_test.cc                | 1 +
+ third_party/concurrent_work_queue/lib/event_count.h            | 1 +
+ third_party/concurrent_work_queue/lib/task_queue.h             | 1 +
+ third_party/concurrent_work_queue/lib/work_queue_base.h        | 1 +
+ third_party/llvm_derived/lib/Support/raw_ostream.cpp           | 1 +
+ tools/btf_info_tool/main.cc                                    | 1 +
+ tools/code_size_test_app/main.cc                               | 1 +
+ 140 files changed, 208 insertions(+)
+
+diff --git a/backends/common/lib/compat/eigen/kernels/cpu_kernels.cc b/backends/common/lib/compat/eigen/kernels/cpu_kernels.cc
+index 14fd8aca5d6..0d30a2c1d34 100644
+--- a/backends/common/lib/compat/eigen/kernels/cpu_kernels.cc
++++ b/backends/common/lib/compat/eigen/kernels/cpu_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file registers a few kernels implemented using the Eigen library.
+ 
++#include <cstdint>
++
+ #include "batch_norm.h"
+ #include "conv2d.h"
+ #include "max_pooling.h"
+diff --git a/backends/common/lib/compat/eigen/kernels/matmul.cc b/backends/common/lib/compat/eigen/kernels/matmul.cc
+index c80c381cbcc..e91d52d01ec 100644
+--- a/backends/common/lib/compat/eigen/kernels/matmul.cc
++++ b/backends/common/lib/compat/eigen/kernels/matmul.cc
+@@ -16,6 +16,8 @@
+ //
+ // Matrix multiplication kernels implemented with Eigen.
+ 
++#include <cstdint>
++
+ #include "tfrt/common/compat/eigen/contraction_kernel.h"
+ #include "tfrt/common/compat/eigen/eigen_kernel.h"
+ #include "tfrt/common/compat/eigen/tensor_types.h"
+diff --git a/backends/common/lib/compat/eigen/kernels/zero_padding.h b/backends/common/lib/compat/eigen/kernels/zero_padding.h
+index ebd2a6d892f..d2fdd88bf8b 100644
+--- a/backends/common/lib/compat/eigen/kernels/zero_padding.h
++++ b/backends/common/lib/compat/eigen/kernels/zero_padding.h
+@@ -17,6 +17,8 @@
+ #ifndef TFRT_BACKENDS_COMMON_LIB_COMPAT_EIGEN_KERNELS_ZERO_PADDING_H_
+ #define TFRT_BACKENDS_COMMON_LIB_COMPAT_EIGEN_KERNELS_ZERO_PADDING_H_
+ 
++#include <cstdint>
++
+ #include "tfrt/common/compat/eigen/eigen_kernel.h"
+ #include "tfrt/common/compat/eigen/tensor_types.h"
+ #include "tfrt/host_context/diagnostic.h"
+diff --git a/backends/common/lib/compat/eigen/ops/cpu_ops.cc b/backends/common/lib/compat/eigen/ops/cpu_ops.cc
+index cb5efc269da..9212da8a4d5 100644
+--- a/backends/common/lib/compat/eigen/ops/cpu_ops.cc
++++ b/backends/common/lib/compat/eigen/ops/cpu_ops.cc
+@@ -15,6 +15,7 @@
+ // This file defines dispatch functions for CPU implementation of TF ops.
+ 
+ #include <cassert>
++#include <cstdint>
+ 
+ #include "../kernels/batch_norm.h"
+ #include "../kernels/conv2d.h"
+diff --git a/backends/common/lib/ops/test/metadata/test_ops.cc b/backends/common/lib/ops/test/metadata/test_ops.cc
+index 89a0872cfac..73869c521b0 100644
+--- a/backends/common/lib/ops/test/metadata/test_ops.cc
++++ b/backends/common/lib/ops/test/metadata/test_ops.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file defines the metadata functions for the test ops dialect.
+ 
++#include <cstdint>
++
+ #include "tfrt/common/ops/test/metadata_functions.h"
+ #include "tfrt/core_runtime/op_utils.h"
+ #include "tfrt/support/error_util.h"
+diff --git a/backends/common/lib/ops/tf/metadata_functions.cc b/backends/common/lib/ops/tf/metadata_functions.cc
+index 762a97c628e..69492d5e67d 100644
+--- a/backends/common/lib/ops/tf/metadata_functions.cc
++++ b/backends/common/lib/ops/tf/metadata_functions.cc
+@@ -16,6 +16,8 @@
+ //
+ // This file contains Metadata functions for TF ops.
+ 
++#include <cstdint>
++
+ #include "tfrt/common/ops/tf/metadata_functions.h"
+ 
+ #include <optional>
+diff --git a/backends/cpu/cpp_tests/ops/tf/buffer_forwarding_test.cc b/backends/cpu/cpp_tests/ops/tf/buffer_forwarding_test.cc
+index b685886a1fc..52f58bb020d 100644
+--- a/backends/cpu/cpp_tests/ops/tf/buffer_forwarding_test.cc
++++ b/backends/cpu/cpp_tests/ops/tf/buffer_forwarding_test.cc
+@@ -14,6 +14,8 @@
+ 
+ //  Tensorflow operations buffer forwarding unit tests.
+ 
++#include <cstdint>
++
+ #include "../../../lib/ops/tf/buffer_forwarding.h"
+ 
+ #include "benchmark/benchmark.h"
+diff --git a/backends/cpu/include/tfrt/cpu/core_runtime/cpu_op_registry.h b/backends/cpu/include/tfrt/cpu/core_runtime/cpu_op_registry.h
+index 024b39dfabb..ebd444802e1 100644
+--- a/backends/cpu/include/tfrt/cpu/core_runtime/cpu_op_registry.h
++++ b/backends/cpu/include/tfrt/cpu/core_runtime/cpu_op_registry.h
+@@ -21,6 +21,7 @@
+ #ifndef TFRT_BACKENDS_CPU_CORE_RUNTIME_CPU_OP_REGISTRY_H_
+ #define TFRT_BACKENDS_CPU_CORE_RUNTIME_CPU_OP_REGISTRY_H_
+ 
++#include <cstdint>
+ #include <memory>
+ 
+ #include "tfrt/core_runtime/op_metadata_function.h"
+diff --git a/backends/cpu/lib/kernels/cpu_kernels.h b/backends/cpu/lib/kernels/cpu_kernels.h
+index bd82f96bfd4..1445859b17b 100644
+--- a/backends/cpu/lib/kernels/cpu_kernels.h
++++ b/backends/cpu/lib/kernels/cpu_kernels.h
+@@ -23,6 +23,7 @@
+ #define EIGEN_USE_GPU
+ #endif  // GOOGLE_CUDA || TENSORFLOW_USE_ROCM
+ 
++#include <cstdint>
+ #include <type_traits>
+ 
+ #include "tfrt/common/compat/eigen/eigen_kernel.h"
+diff --git a/backends/cpu/lib/kernels/image/image_kernels.cc b/backends/cpu/lib/kernels/image/image_kernels.cc
+index 7deeebb2d26..90196b5099c 100644
+--- a/backends/cpu/lib/kernels/image/image_kernels.cc
++++ b/backends/cpu/lib/kernels/image/image_kernels.cc
+@@ -14,6 +14,7 @@
+ 
+ // This file implements kernels that process images.
+ 
++#include <cstdint>
+ #include <utility>
+ 
+ #include "jpeg/jpeg_mem.h"
+diff --git a/backends/cpu/lib/kernels/image/jpeg/jpeg_handle.cc b/backends/cpu/lib/kernels/image/jpeg/jpeg_handle.cc
+index 4e0e5218a17..bbbef6f21ef 100644
+--- a/backends/cpu/lib/kernels/image/jpeg/jpeg_handle.cc
++++ b/backends/cpu/lib/kernels/image/jpeg/jpeg_handle.cc
+@@ -18,6 +18,8 @@ limitations under the License.
+ //
+ // Based on tensorflow/core/lib/jpeg/jpeg_handle.cc
+ 
++#include <cstdint>
++
+ #include "jpeg_handle.h"
+ 
+ #include <setjmp.h>
+diff --git a/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.cc b/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.cc
+index b4919b9b73b..9f8e9c4ac1e 100644
+--- a/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.cc
++++ b/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.cc
+@@ -22,6 +22,7 @@ limitations under the License.
+ 
+ #include <setjmp.h>
+ 
++#include <cstdint>
+ #include <string>
+ 
+ #include "jpeg_handle.h"
+diff --git a/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.h b/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.h
+index a0ba3fc5405..5b26013b3d8 100644
+--- a/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.h
++++ b/backends/cpu/lib/kernels/image/jpeg/jpeg_mem.h
+@@ -24,6 +24,7 @@ limitations under the License.
+ #define TFRT_BACKENDS_CPU_LIB_KERNELS_IMAGE_JPEG_JPEG_MEM_H_
+ 
+ #include <cstdio>
++#include <cstdint>
+ #include <functional>
+ 
+ extern "C" {
+diff --git a/backends/cpu/lib/kernels/image/resize_bilinear_op.cc b/backends/cpu/lib/kernels/image/resize_bilinear_op.cc
+index ca09d877c74..3e7be3cc4a4 100644
+--- a/backends/cpu/lib/kernels/image/resize_bilinear_op.cc
++++ b/backends/cpu/lib/kernels/image/resize_bilinear_op.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file declaress the functions to resize image.
+ 
++#include <cstdint>
++
+ #include "resize_bilinear_op.h"
+ 
+ namespace tfrt {
+diff --git a/backends/cpu/lib/kernels/proto/proto_kernels.cc b/backends/cpu/lib/kernels/proto/proto_kernels.cc
+index 2ff8ba7433d..b7fd9253c9f 100644
+--- a/backends/cpu/lib/kernels/proto/proto_kernels.cc
++++ b/backends/cpu/lib/kernels/proto/proto_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements protobuf-related kernels.
+ 
++#include <cstdint>
++
+ #include "tfrt/cpu/kernels/proto/example.proto.h"
+ #include "tfrt/host_context/async_dispatch.h"
+ #include "tfrt/host_context/diagnostic.h"
+diff --git a/backends/cpu/lib/kernels/tile_kernel.cc b/backends/cpu/lib/kernels/tile_kernel.cc
+index d4d8cf3a128..b4f4917c5e6 100644
+--- a/backends/cpu/lib/kernels/tile_kernel.cc
++++ b/backends/cpu/lib/kernels/tile_kernel.cc
+@@ -16,6 +16,8 @@
+ 
+ // Tile Tensorflow kernel implementations.
+ 
++#include <cstdint>
++
+ #include "./tile_kernel.h"
+ 
+ namespace tfrt {
+diff --git a/backends/cpu/lib/ops/test/btf_kernels.cc b/backends/cpu/lib/ops/test/btf_kernels.cc
+index 05f2999e255..c920b76886f 100644
+--- a/backends/cpu/lib/ops/test/btf_kernels.cc
++++ b/backends/cpu/lib/ops/test/btf_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements kernels for reading tensors from file.
+ 
++#include <cstdint>
++
+ #include "tfrt/cpu/ops/test/cpu_ops_and_kernels.h"
+ #include "tfrt/host_context/kernel_registry.h"
+ #include "tfrt/host_context/kernel_utils.h"
+diff --git a/backends/cpu/lib/ops/test/coo_host_tensor_kernels.cc b/backends/cpu/lib/ops/test/coo_host_tensor_kernels.cc
+index 43351e47399..91e94942b62 100644
+--- a/backends/cpu/lib/ops/test/coo_host_tensor_kernels.cc
++++ b/backends/cpu/lib/ops/test/coo_host_tensor_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements kernels for handling COO host tensors.
+ 
++#include <cstdint>
++
+ #include "llvm/Support/Error.h"
+ #include "tfrt/core_runtime/op_attrs.h"
+ #include "tfrt/core_runtime/op_utils.h"
+diff --git a/backends/cpu/lib/ops/test/example_ops.cc b/backends/cpu/lib/ops/test/example_ops.cc
+index 51db6820b14..9e906337d59 100644
+--- a/backends/cpu/lib/ops/test/example_ops.cc
++++ b/backends/cpu/lib/ops/test/example_ops.cc
+@@ -15,6 +15,8 @@
+ // This file defines some example op implementations in the "tfrt_test."
+ // namespace.
+ 
++#include <cstdint>
++
+ #include "../../kernels/cpu_kernels.h"
+ #include "llvm/Support/Casting.h"
+ #include "llvm_derived/Support/raw_ostream.h"
+diff --git a/backends/cpu/lib/ops/test/resnet_tensor_kernels.cc b/backends/cpu/lib/ops/test/resnet_tensor_kernels.cc
+index 2c3d17fb74f..2adcf34e368 100644
+--- a/backends/cpu/lib/ops/test/resnet_tensor_kernels.cc
++++ b/backends/cpu/lib/ops/test/resnet_tensor_kernels.cc
+@@ -14,6 +14,7 @@
+ 
+ // This file defines the tensor kernels for resnet.
+ 
++#include <cstdint>
+ #include <cmath>
+ 
+ #include "../../kernels/cpu_kernels.h"
+diff --git a/backends/cpu/lib/ops/tf/cpu_ops.cc b/backends/cpu/lib/ops/tf/cpu_ops.cc
+index 14c32fa57e6..d826c722da3 100644
+--- a/backends/cpu/lib/ops/tf/cpu_ops.cc
++++ b/backends/cpu/lib/ops/tf/cpu_ops.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/cpu/ops/tf/cpu_ops.h"
+ 
++#include <cstdint>
++
+ #include "../../kernels/cpu_kernels.h"
+ #include "constant_ops.h"
+ #include "cwise_binary_ops.h"
+diff --git a/backends/cpu/lib/ops/tf/matmul_fusion_ops.cc b/backends/cpu/lib/ops/tf/matmul_fusion_ops.cc
+index 7c577b956cc..99fdbf82d4d 100644
+--- a/backends/cpu/lib/ops/tf/matmul_fusion_ops.cc
++++ b/backends/cpu/lib/ops/tf/matmul_fusion_ops.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "matmul_fusion_ops.h"
+ 
++#include <cstdint>
+ #include <algorithm>
+ #include <initializer_list>
+ 
+diff --git a/backends/cpu/lib/ops/tf/matmul_ops.cc b/backends/cpu/lib/ops/tf/matmul_ops.cc
+index edd991eb69f..e5497f81e8a 100644
+--- a/backends/cpu/lib/ops/tf/matmul_ops.cc
++++ b/backends/cpu/lib/ops/tf/matmul_ops.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "matmul_ops.h"
+ 
++#include <cstdint>
+ #include <algorithm>
+ #include <complex>
+ #include <initializer_list>
+diff --git a/backends/cpu/lib/ops/tf/shape_ops.cc b/backends/cpu/lib/ops/tf/shape_ops.cc
+index c2cf75b168f..ac43a780544 100644
+--- a/backends/cpu/lib/ops/tf/shape_ops.cc
++++ b/backends/cpu/lib/ops/tf/shape_ops.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "shape_ops.h"
+ 
++#include <cstdint>
+ #include <algorithm>
+ 
+ #include "tfrt/core_runtime/op_utils.h"
+diff --git a/backends/cpu/lib/ops/tf/type_dispatch.h b/backends/cpu/lib/ops/tf/type_dispatch.h
+index 425825eca7b..b00ae3a1351 100644
+--- a/backends/cpu/lib/ops/tf/type_dispatch.h
++++ b/backends/cpu/lib/ops/tf/type_dispatch.h
+@@ -21,6 +21,8 @@
+ #ifndef TFRT_BACKENDS_CPU_OPS_TF_DISPATCH_OP_H_
+ #define TFRT_BACKENDS_CPU_OPS_TF_DISPATCH_OP_H_
+ 
++#include <cstdint>
++
+ #include "tfrt/common/compat/eigen/eigen_dtype.h"
+ #include "tfrt/dtype/dtype.h"
+ 
+diff --git a/cpp_tests/bef/bef_test.cc b/cpp_tests/bef/bef_test.cc
+index 91f8fced273..086bd265b42 100644
+--- a/cpp_tests/bef/bef_test.cc
++++ b/cpp_tests/bef/bef_test.cc
+@@ -15,6 +15,8 @@
+  */
+ #include "tfrt/bef/bef.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ 
+diff --git a/cpp_tests/bef/kernel_test.cc b/cpp_tests/bef/kernel_test.cc
+index 04cc2a2123b..29a22cf88d8 100644
+--- a/cpp_tests/bef/kernel_test.cc
++++ b/cpp_tests/bef/kernel_test.cc
+@@ -15,6 +15,8 @@
+  */
+ #include "tfrt/bef/kernel.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ 
+diff --git a/cpp_tests/bef/span_test.cc b/cpp_tests/bef/span_test.cc
+index a2135fc12cd..882274c0811 100644
+--- a/cpp_tests/bef/span_test.cc
++++ b/cpp_tests/bef/span_test.cc
+@@ -15,6 +15,7 @@
+  */
+ #include "tfrt/bef/span.h"
+ 
++#include <cstdint>
+ #include <vector>
+ 
+ #include "gmock/gmock.h"
+diff --git a/cpp_tests/bef_converter/bef_attr_emitter_test.cc b/cpp_tests/bef_converter/bef_attr_emitter_test.cc
+index ddceae8ab98..d14c1d20499 100644
+--- a/cpp_tests/bef_converter/bef_attr_emitter_test.cc
++++ b/cpp_tests/bef_converter/bef_attr_emitter_test.cc
+@@ -18,6 +18,8 @@
+ 
+ #include "../../lib/bef_converter/mlir_to_bef/bef_attr_emitter.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ #include "llvm/ADT/ArrayRef.h"
+diff --git a/cpp_tests/bef_converter/bef_attr_reader_test.cc b/cpp_tests/bef_converter/bef_attr_reader_test.cc
+index 48add720334..eba2ff5f02a 100644
+--- a/cpp_tests/bef_converter/bef_attr_reader_test.cc
++++ b/cpp_tests/bef_converter/bef_attr_reader_test.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "../../lib/bef_converter/bef_to_mlir/bef_attr_reader.h"
+ 
++#include <cstdint>
+ #include <memory>
+ 
+ #include "../../lib/bef_converter/mlir_to_bef/bef_attr_emitter.h"
+diff --git a/cpp_tests/core_runtime/driver_test.cc b/cpp_tests/core_runtime/driver_test.cc
+index ba6b59c639b..31832b6d7ad 100644
+--- a/cpp_tests/core_runtime/driver_test.cc
++++ b/cpp_tests/core_runtime/driver_test.cc
+@@ -17,6 +17,7 @@
+ 
+ #include "driver.h"
+ 
++#include <cstdint>
+ #include <memory>
+ 
+ #include "benchmark/benchmark.h"
+diff --git a/cpp_tests/dtype/dtype_test.cc b/cpp_tests/dtype/dtype_test.cc
+index 63f999b9efb..c62d9505fb4 100644
+--- a/cpp_tests/dtype/dtype_test.cc
++++ b/cpp_tests/dtype/dtype_test.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/dtype/dtype.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ #include "tfrt/dtype/dtype_formatter.h"
+diff --git a/cpp_tests/host_context/host_buffer_test.cc b/cpp_tests/host_context/host_buffer_test.cc
+index 338ebd22fd6..b67be1cc588 100644
+--- a/cpp_tests/host_context/host_buffer_test.cc
++++ b/cpp_tests/host_context/host_buffer_test.cc
+@@ -18,6 +18,8 @@
+ 
+ #include "tfrt/host_context/host_buffer.h"
+ 
++#include <cstdint>
++
+ #include "gtest/gtest.h"
+ #include "tfrt/host_context/host_allocator.h"
+ 
+diff --git a/cpp_tests/host_context/parallel_for_test.cc b/cpp_tests/host_context/parallel_for_test.cc
+index 161b8609b0b..0cb5a9e940a 100644
+--- a/cpp_tests/host_context/parallel_for_test.cc
++++ b/cpp_tests/host_context/parallel_for_test.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "tfrt/host_context/parallel_for.h"
+ 
++#include <cstdint>
+ #include <chrono>
+ #include <thread>
+ #include <utility>
+diff --git a/cpp_tests/support/bef_reader_test.cc b/cpp_tests/support/bef_reader_test.cc
+index 9bfb8d8962f..f04cee56e17 100644
+--- a/cpp_tests/support/bef_reader_test.cc
++++ b/cpp_tests/support/bef_reader_test.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/bef/bef_reader.h"
+ 
++#include <cstdint>
+ #include <numeric>
+ 
+ #include "gtest/gtest.h"
+diff --git a/cpp_tests/support/crc32c_test.cc b/cpp_tests/support/crc32c_test.cc
+index 7dbb4f0af7f..dc09740b2a3 100644
+--- a/cpp_tests/support/crc32c_test.cc
++++ b/cpp_tests/support/crc32c_test.cc
+@@ -14,6 +14,8 @@
+ 
+ #include "tfrt/support/crc32c.h"
+ 
++#include <cstdint>
++
+ #include "gtest/gtest.h"
+ 
+ namespace tfrt {
+diff --git a/cpp_tests/support/dense_host_tensor_test.cc b/cpp_tests/support/dense_host_tensor_test.cc
+index 44c0645b04f..ecb77c08130 100644
+--- a/cpp_tests/support/dense_host_tensor_test.cc
++++ b/cpp_tests/support/dense_host_tensor_test.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "tfrt/tensor/dense_host_tensor.h"
+ 
++#include <cstdint>
+ #include <complex>
+ 
+ #include "gmock/gmock.h"
+diff --git a/cpp_tests/support/map_by_type_test.cc b/cpp_tests/support/map_by_type_test.cc
+index 1837bc2cf8b..77cdbb603bc 100644
+--- a/cpp_tests/support/map_by_type_test.cc
++++ b/cpp_tests/support/map_by_type_test.cc
+@@ -15,6 +15,8 @@
+ // Tests related to MapByType
+ #include "tfrt/support/map_by_type.h"
+ 
++#include <cstdint>
++
+ #include "benchmark/benchmark.h"
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+diff --git a/cpp_tests/support/ref_count_test.cc b/cpp_tests/support/ref_count_test.cc
+index a7e75876fbd..594f1b21aea 100644
+--- a/cpp_tests/support/ref_count_test.cc
++++ b/cpp_tests/support/ref_count_test.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/support/ref_count.h"
+ 
++#include <cstdint>
++
+ #include "gtest/gtest.h"
+ 
+ namespace tfrt {
+diff --git a/cpp_tests/support/variant_test.cc b/cpp_tests/support/variant_test.cc
+index 1d6356fb291..d7a9e5e4d51 100644
+--- a/cpp_tests/support/variant_test.cc
++++ b/cpp_tests/support/variant_test.cc
+@@ -15,6 +15,8 @@
+ // Tests related to variant.
+ #include "tfrt/support/variant.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ 
+diff --git a/cpp_tests/tensor/btf_test.cc b/cpp_tests/tensor/btf_test.cc
+index c558cc98dc9..6e48de218f7 100644
+--- a/cpp_tests/tensor/btf_test.cc
++++ b/cpp_tests/tensor/btf_test.cc
+@@ -18,6 +18,8 @@
+ 
+ #include "tfrt/tensor/btf.h"
+ 
++#include <cstdint>
++
+ #include "gtest/gtest.h"
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/cpp_tests/test_util.h"
+diff --git a/cpp_tests/tensor/tensor_test.cc b/cpp_tests/tensor/tensor_test.cc
+index eb50c9a9a1f..41902a297c7 100644
+--- a/cpp_tests/tensor/tensor_test.cc
++++ b/cpp_tests/tensor/tensor_test.cc
+@@ -16,6 +16,7 @@
+ 
+ // Unit test for TFRT Tensor.
+ 
++#include <cstdint>
+ #include <memory>
+ 
+ #include "gmock/gmock.h"
+diff --git a/cpp_tests/utils/kernel_runner_test.cc b/cpp_tests/utils/kernel_runner_test.cc
+index 7894713fb3c..4dae907d2e8 100644
+--- a/cpp_tests/utils/kernel_runner_test.cc
++++ b/cpp_tests/utils/kernel_runner_test.cc
+@@ -14,6 +14,8 @@
+ 
+ #include "tfrt/utils/kernel_runner.h"
+ 
++#include <cstdint>
++
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+ #include "tfrt/cpp_tests/test_util.h"
+diff --git a/include/tfrt/bef/bef.h b/include/tfrt/bef/bef.h
+index 2a21b644ee3..6ab31e47ee8 100644
+--- a/include/tfrt/bef/bef.h
++++ b/include/tfrt/bef/bef.h
+@@ -81,6 +81,7 @@
+ #define TFRT_BEF_BEF_H_
+ 
+ #include <cassert>
++#include <cstdint>
+ #include <cstring>
+ #include <utility>
+ #include <vector>
+diff --git a/include/tfrt/bef/bef_location.h b/include/tfrt/bef/bef_location.h
+index eb2f822ecd2..4c5cf92358a 100644
+--- a/include/tfrt/bef/bef_location.h
++++ b/include/tfrt/bef/bef_location.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_BEF_BEF_LOCATION_H_
+ #define TFRT_BEF_BEF_LOCATION_H_
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "llvm/ADT/SmallVector.h"
+diff --git a/include/tfrt/bef/bef_reader.h b/include/tfrt/bef/bef_reader.h
+index b0ff7ab5a73..12c01b6eaa0 100644
+--- a/include/tfrt/bef/bef_reader.h
++++ b/include/tfrt/bef/bef_reader.h
+@@ -20,6 +20,7 @@
+ #ifndef TFRT_SUPPORT_BEF_READER_H_
+ #define TFRT_SUPPORT_BEF_READER_H_
+ 
++#include <cstdint>
+ #include <cassert>
+ 
+ #include "llvm/ADT/ArrayRef.h"
+diff --git a/include/tfrt/bef/kernel.h b/include/tfrt/bef/kernel.h
+index 7221bf0c3ec..9fa30375edc 100644
+--- a/include/tfrt/bef/kernel.h
++++ b/include/tfrt/bef/kernel.h
+@@ -16,6 +16,8 @@
+ #ifndef TFRT_BEF_KERNEL_H_
+ #define TFRT_BEF_KERNEL_H_
+ 
++#include <cstdint>
++
+ #include "tfrt/bef/bef.h"
+ 
+ namespace tfrt {
+diff --git a/include/tfrt/bef_converter/bef_attr_encoder.h b/include/tfrt/bef_converter/bef_attr_encoder.h
+index dd607073d82..8b0e346f881 100644
+--- a/include/tfrt/bef_converter/bef_attr_encoder.h
++++ b/include/tfrt/bef_converter/bef_attr_encoder.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_BEF_CONVERTER_BEF_ATTR_ENCODER_H_
+ #define TFRT_BEF_CONVERTER_BEF_ATTR_ENCODER_H_
+ 
++#include <cstdint>
++
+ #include "tfrt/bef/bef_encoding.h"
+ #include "tfrt/bef_converter/bef_emitter.h"
+ #include "tfrt/support/forward_decls.h"
+diff --git a/include/tfrt/bef_converter/bef_emitter.h b/include/tfrt/bef_converter/bef_emitter.h
+index 2aae7d44406..7233ffd1cd4 100644
+--- a/include/tfrt/bef_converter/bef_emitter.h
++++ b/include/tfrt/bef_converter/bef_emitter.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_BEF_CONVERTER_BEF_EMITTER_H_
+ #define TFRT_BEF_CONVERTER_BEF_EMITTER_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/ArrayRef.h"
+ #include "llvm/Support/Alignment.h"
+ #include "llvm/Support/MathExtras.h"
+diff --git a/include/tfrt/bef_converter/bef_to_mlir.h b/include/tfrt/bef_converter/bef_to_mlir.h
+index e344fe51a39..d521fb6eade 100644
+--- a/include/tfrt/bef_converter/bef_to_mlir.h
++++ b/include/tfrt/bef_converter/bef_to_mlir.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_BEF_CONVERTER_BEF_TO_MLIR_H_
+ #define TFRT_BEF_CONVERTER_BEF_TO_MLIR_H_
+ 
++#include <cstdint>
++
+ #include "tfrt/support/forward_decls.h"
+ 
+ namespace mlir {
+diff --git a/include/tfrt/bef_executor/bef_file.h b/include/tfrt/bef_executor/bef_file.h
+index 1e4f3f99118..10d49db6a12 100644
+--- a/include/tfrt/bef_executor/bef_file.h
++++ b/include/tfrt/bef_executor/bef_file.h
+@@ -20,6 +20,7 @@
+ #ifndef TFRT_BEF_EXECUTOR_BEF_FILE_H_
+ #define TFRT_BEF_EXECUTOR_BEF_FILE_H_
+ 
++#include <cstdint>
+ #include <functional>
+ #include <memory>
+ 
+diff --git a/include/tfrt/compiler/opdefs/tfrt_traits.h b/include/tfrt/compiler/opdefs/tfrt_traits.h
+index 18b17e53055..832f85d3d52 100644
+--- a/include/tfrt/compiler/opdefs/tfrt_traits.h
++++ b/include/tfrt/compiler/opdefs/tfrt_traits.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_COMPILER_OPDEFS_TFRT_TRAITS_H_
+ #define TFRT_COMPILER_OPDEFS_TFRT_TRAITS_H_
+ 
++#include <cstdint>
++
+ #include "mlir/IR/OpDefinition.h"
+ 
+ namespace tfrt {
+diff --git a/include/tfrt/compiler/stream_analysis.h b/include/tfrt/compiler/stream_analysis.h
+index 96c6159bf35..a55f524fed8 100644
+--- a/include/tfrt/compiler/stream_analysis.h
++++ b/include/tfrt/compiler/stream_analysis.h
+@@ -49,6 +49,7 @@
+ #ifndef TFRT_COMPILER_STREAM_ANALYSIS_H_
+ #define TFRT_COMPILER_STREAM_ANALYSIS_H_
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "llvm/ADT/SetVector.h"
+diff --git a/include/tfrt/core_runtime/op_attr_type.h b/include/tfrt/core_runtime/op_attr_type.h
+index f0c2f4847ab..dcfda0925c0 100644
+--- a/include/tfrt/core_runtime/op_attr_type.h
++++ b/include/tfrt/core_runtime/op_attr_type.h
+@@ -21,6 +21,7 @@
+ 
+ #include <cinttypes>
+ #include <complex>
++#include <cstdint>
+ #include <utility>
+ 
+ #include "tfrt/bef/bef_encoding.h"
+diff --git a/include/tfrt/core_runtime/opdefs/attributes.h b/include/tfrt/core_runtime/opdefs/attributes.h
+index c4f2a030925..7b6c0914e05 100644
+--- a/include/tfrt/core_runtime/opdefs/attributes.h
++++ b/include/tfrt/core_runtime/opdefs/attributes.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_CORE_RUNTIME_OPDEFS_ATTRIBUTES_H_
+ #define TFRT_CORE_RUNTIME_OPDEFS_ATTRIBUTES_H_
+ 
++#include <cstdint>
++
+ #include "mlir/IR/Attributes.h"
+ 
+ namespace tfrt {
+diff --git a/include/tfrt/core_runtime/tensor_handle.h b/include/tfrt/core_runtime/tensor_handle.h
+index a6d8d6cc303..10ae184790e 100644
+--- a/include/tfrt/core_runtime/tensor_handle.h
++++ b/include/tfrt/core_runtime/tensor_handle.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_CORE_RUNTIME_TENSOR_HANDLE_H_
+ #define TFRT_CORE_RUNTIME_TENSOR_HANDLE_H_
+ 
++#include <cstdint>
+ #include <memory>
+ 
+ #include "llvm/ADT/PointerIntPair.h"
+diff --git a/include/tfrt/dtype/quantized_types.h b/include/tfrt/dtype/quantized_types.h
+index 479866af22a..70adf79bd1d 100644
+--- a/include/tfrt/dtype/quantized_types.h
++++ b/include/tfrt/dtype/quantized_types.h
+@@ -20,6 +20,8 @@
+ #ifndef TFRT_DTYPE_QUANTIZED_TYPES_H_
+ #define TFRT_DTYPE_QUANTIZED_TYPES_H_
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/host_context/attribute_utils.h b/include/tfrt/host_context/attribute_utils.h
+index cbded469e08..7fb8cc52100 100644
+--- a/include/tfrt/host_context/attribute_utils.h
++++ b/include/tfrt/host_context/attribute_utils.h
+@@ -21,6 +21,7 @@
+ #ifndef TFRT_HOST_CONTEXT_ATTRIBUTE_UTILS_H_
+ #define TFRT_HOST_CONTEXT_ATTRIBUTE_UTILS_H_
+ 
++#include <cstdint>
+ #include <numeric>
+ 
+ #include "llvm/ADT/ArrayRef.h"
+diff --git a/include/tfrt/host_context/execution_context.h b/include/tfrt/host_context/execution_context.h
+index 5556e2844d2..8cebe8992a8 100644
+--- a/include/tfrt/host_context/execution_context.h
++++ b/include/tfrt/host_context/execution_context.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_HOST_CONTEXT_EXECUTION_CONTEXT_H_
+ #define TFRT_HOST_CONTEXT_EXECUTION_CONTEXT_H_
+ 
++#include <cstdint>
+ #include <utility>
+ 
+ #include "llvm/Support/Error.h"
+diff --git a/include/tfrt/host_context/host_buffer.h b/include/tfrt/host_context/host_buffer.h
+index 4acdf1f7aa1..b405751cef5 100644
+--- a/include/tfrt/host_context/host_buffer.h
++++ b/include/tfrt/host_context/host_buffer.h
+@@ -21,6 +21,8 @@
+ #ifndef TFRT_HOST_CONTEXT_HOST_BUFFER_H_
+ #define TFRT_HOST_CONTEXT_HOST_BUFFER_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/ArrayRef.h"
+ #include "llvm/ADT/FunctionExtras.h"
+ #include "llvm/Support/raw_ostream.h"
+diff --git a/include/tfrt/host_context/kernel_frame.h b/include/tfrt/host_context/kernel_frame.h
+index 3adb2ef23e0..4f8bb3bcf33 100644
+--- a/include/tfrt/host_context/kernel_frame.h
++++ b/include/tfrt/host_context/kernel_frame.h
+@@ -22,6 +22,7 @@
+ #ifndef TFRT_HOST_CONTEXT_KERNEL_CONTEXT_H_
+ #define TFRT_HOST_CONTEXT_KERNEL_CONTEXT_H_
+ 
++#include <cstdint>
+ #include <string>
+ #include <utility>
+ 
+diff --git a/include/tfrt/host_context/kernel_utils.h b/include/tfrt/host_context/kernel_utils.h
+index f2fc4c15121..7c1ecef2d08 100644
+--- a/include/tfrt/host_context/kernel_utils.h
++++ b/include/tfrt/host_context/kernel_utils.h
+@@ -23,6 +23,7 @@
+ #ifndef TFRT_HOST_CONTEXT_KERNEL_UTILS_H_
+ #define TFRT_HOST_CONTEXT_KERNEL_UTILS_H_
+ 
++#include <cstdint>
+ #include <type_traits>
+ 
+ #include "llvm/Support/Error.h"
+diff --git a/include/tfrt/host_context/parallel_for.h b/include/tfrt/host_context/parallel_for.h
+index 3fe771d3a4a..6837eaed68d 100644
+--- a/include/tfrt/host_context/parallel_for.h
++++ b/include/tfrt/host_context/parallel_for.h
+@@ -20,6 +20,7 @@
+ #define TFRT_SUPPORT_PARALLEL_FOR_H_
+ 
+ #include <cstddef>
++#include <cstdint>
+ 
+ #include "llvm/ADT/FunctionExtras.h"
+ #include "llvm/ADT/STLExtras.h"
+diff --git a/include/tfrt/host_context/sync_kernel_frame.h b/include/tfrt/host_context/sync_kernel_frame.h
+index f92d7633691..5a96153b0ec 100644
+--- a/include/tfrt/host_context/sync_kernel_frame.h
++++ b/include/tfrt/host_context/sync_kernel_frame.h
+@@ -23,6 +23,7 @@
+ #ifndef TFRT_HOST_CONTEXT_SYNC_KERNEL_FRAME_H_
+ #define TFRT_HOST_CONTEXT_SYNC_KERNEL_FRAME_H_
+ 
++#include <cstdint>
+ #include <utility>
+ 
+ #include "llvm/ADT/ArrayRef.h"
+diff --git a/include/tfrt/support/bf16.h b/include/tfrt/support/bf16.h
+index 005beaa2978..f57779d1859 100644
+--- a/include/tfrt/support/bf16.h
++++ b/include/tfrt/support/bf16.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_SUPPORT_BF16_H_
+ #define TFRT_SUPPORT_BF16_H_
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/support/crc32c.h b/include/tfrt/support/crc32c.h
+index 1a3d8b8d9e7..1505e3c00a5 100644
+--- a/include/tfrt/support/crc32c.h
++++ b/include/tfrt/support/crc32c.h
+@@ -22,6 +22,7 @@
+ #define TFRT_SUPPORT_CRC32C_H_
+ 
+ #include <stddef.h>
++#include <stdint.h>
+ 
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/support/forward_decls.h b/include/tfrt/support/forward_decls.h
+index c3a42504d96..18c8ecacfe2 100644
+--- a/include/tfrt/support/forward_decls.h
++++ b/include/tfrt/support/forward_decls.h
+@@ -21,6 +21,7 @@
+ #define TFRT_SUPPORT_FORWARD_DECLS_H_
+ 
+ #include <cstddef>
++#include <cstdint>
+ #include <memory>
+ 
+ #include "llvm/Support/Casting.h"
+diff --git a/include/tfrt/support/fp16.h b/include/tfrt/support/fp16.h
+index 2cd6ae63799..4bd1fe8aab2 100644
+--- a/include/tfrt/support/fp16.h
++++ b/include/tfrt/support/fp16.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_SUPPORT_FP16_H_
+ #define TFRT_SUPPORT_FP16_H_
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/support/hash_util.h b/include/tfrt/support/hash_util.h
+index f41ea7b1d8e..f3f4ac75674 100644
+--- a/include/tfrt/support/hash_util.h
++++ b/include/tfrt/support/hash_util.h
+@@ -20,6 +20,8 @@
+ #ifndef TFRT_SUPPORT_HASH_UTIL_H_
+ #define TFRT_SUPPORT_HASH_UTIL_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/StringRef.h"
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/support/logging.h b/include/tfrt/support/logging.h
+index d8f325a5442..992199343a3 100644
+--- a/include/tfrt/support/logging.h
++++ b/include/tfrt/support/logging.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_SUPPORT_LOGGING_H_
+ #define TFRT_SUPPORT_LOGGING_H_
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ 
+ // There are four severity levels: INFO, WARNING, ERROR, FATAL.
+diff --git a/include/tfrt/support/philox_random.h b/include/tfrt/support/philox_random.h
+index 9fea4cdc148..ea48e02f3dc 100644
+--- a/include/tfrt/support/philox_random.h
++++ b/include/tfrt/support/philox_random.h
+@@ -26,6 +26,7 @@
+ #include <stdlib.h>
+ 
+ #include <array>
++#include <cstdint>
+ 
+ #include "tfrt/support/forward_decls.h"
+ 
+diff --git a/include/tfrt/support/raw_coding.h b/include/tfrt/support/raw_coding.h
+index ba7d6357de9..1ca6c74ce84 100644
+--- a/include/tfrt/support/raw_coding.h
++++ b/include/tfrt/support/raw_coding.h
+@@ -21,6 +21,7 @@
+ #ifndef TFRT_SUPPORT_RAW_CODING_H_
+ #define TFRT_SUPPORT_RAW_CODING_H_
+ 
++#include <cstdint>
+ #include <cstring>
+ 
+ #include "tfrt/support/forward_decls.h"
+diff --git a/include/tfrt/support/string_util.h b/include/tfrt/support/string_util.h
+index 4af4460c770..227a8ee28a2 100644
+--- a/include/tfrt/support/string_util.h
++++ b/include/tfrt/support/string_util.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_SUPPORT_STRING_UTIL_H_
+ #define TFRT_SUPPORT_STRING_UTIL_H_
+ 
++#include <cstdint>
+ #include <sstream>
+ #include <string>
+ #include <utility>
+diff --git a/include/tfrt/support/thread_environment_std.h b/include/tfrt/support/thread_environment_std.h
+index abba23a06d8..f35ffc00e20 100644
+--- a/include/tfrt/support/thread_environment_std.h
++++ b/include/tfrt/support/thread_environment_std.h
+@@ -22,6 +22,7 @@
+ #ifndef TFRT_SUPPORT_THREAD_ENVIRONMENT_STD_H_
+ #define TFRT_SUPPORT_THREAD_ENVIRONMENT_STD_H_
+ 
++#include <cstdint>
+ #include <thread>
+ 
+ #include "llvm/ADT/StringRef.h"
+diff --git a/include/tfrt/support/type_id.h b/include/tfrt/support/type_id.h
+index 4e59c1cb47f..ab613fe4613 100644
+--- a/include/tfrt/support/type_id.h
++++ b/include/tfrt/support/type_id.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_SUPPORT_TYPE_ID_H_
+ #define TFRT_SUPPORT_TYPE_ID_H_
+ 
++#include <cstdint>
+ #include <atomic>
+ 
+ namespace tfrt {
+diff --git a/include/tfrt/support/variant.h b/include/tfrt/support/variant.h
+index 858f881ab14..e79c3b838b1 100644
+--- a/include/tfrt/support/variant.h
++++ b/include/tfrt/support/variant.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_SUPPORT_VARIANT_H_
+ #define TFRT_SUPPORT_VARIANT_H_
+ 
++#include <cstdint>
+ #include <tuple>
+ #include <type_traits>
+ 
+diff --git a/include/tfrt/tensor/dense_view.h b/include/tfrt/tensor/dense_view.h
+index 0b0ac733c27..805e1fad87c 100644
+--- a/include/tfrt/tensor/dense_view.h
++++ b/include/tfrt/tensor/dense_view.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_TENSOR_DENSE_VIEW_H_
+ #define TFRT_TENSOR_DENSE_VIEW_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/ArrayRef.h"
+ #include "tfrt/tensor/tensor_metadata.h"
+ 
+diff --git a/include/tfrt/tensor/tensor_type_registration.h b/include/tfrt/tensor/tensor_type_registration.h
+index c7f3b4f8fc4..0f151e51925 100644
+--- a/include/tfrt/tensor/tensor_type_registration.h
++++ b/include/tfrt/tensor/tensor_type_registration.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_TENSOR_TENSOR_TYPE_REGISTRATION_H_
+ #define TFRT_TENSOR_TENSOR_TYPE_REGISTRATION_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/StringMap.h"
+ #include "tfrt/support/forward_decls.h"
+ #include "tfrt/support/mutex.h"
+diff --git a/include/tfrt/utils/kernel_runner.h b/include/tfrt/utils/kernel_runner.h
+index e59ea9ef303..e5bddb6a1d2 100644
+--- a/include/tfrt/utils/kernel_runner.h
++++ b/include/tfrt/utils/kernel_runner.h
+@@ -18,6 +18,7 @@
+ #define TFRT_UTILS_KERNEL_RUNNER_H_
+ 
+ #include <cstddef>
++#include <cstdint>
+ #include <cstring>
+ #include <type_traits>
+ 
+diff --git a/lib/basic_kernels/boolean_kernels.cc b/lib/basic_kernels/boolean_kernels.cc
+index d0f8b478324..3b796aa3600 100644
+--- a/lib/basic_kernels/boolean_kernels.cc
++++ b/lib/basic_kernels/boolean_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements host executor kernels for boolean types.
+ 
++#include <cstdint>
++
+ #include "tfrt/basic_kernels/basic_kernels.h"
+ #include "tfrt/host_context/kernel_utils.h"
+ 
+diff --git a/lib/basic_kernels/control_flow_kernels.cc b/lib/basic_kernels/control_flow_kernels.cc
+index 32c833b9c1c..bb02d382ab5 100644
+--- a/lib/basic_kernels/control_flow_kernels.cc
++++ b/lib/basic_kernels/control_flow_kernels.cc
+@@ -15,6 +15,7 @@
+ // This file implements core control flow related kernels.
+ 
+ #include <algorithm>
++#include <cstdint>
+ #include <iterator>
+ #include <utility>
+ 
+diff --git a/lib/basic_kernels/integer_kernels.cc b/lib/basic_kernels/integer_kernels.cc
+index 6c6689780dc..4cf1b996ead 100644
+--- a/lib/basic_kernels/integer_kernels.cc
++++ b/lib/basic_kernels/integer_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements a host executor kernels for integer types.
+ 
++#include <cstdint>
++
+ #include "llvm_derived/Support/raw_ostream.h"
+ #include "tfrt/basic_kernels/basic_kernels.h"
+ #include "tfrt/host_context/kernel_utils.h"
+diff --git a/lib/bef/bef_location.cc b/lib/bef/bef_location.cc
+index bd68c57bc4c..6ce49a6731e 100644
+--- a/lib/bef/bef_location.cc
++++ b/lib/bef/bef_location.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/bef/bef_location.h"
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "llvm/Support/raw_ostream.h"
+diff --git a/lib/bef_converter/bef_emitter.cc b/lib/bef_converter/bef_emitter.cc
+index 382e0469909..41997c8c980 100644
+--- a/lib/bef_converter/bef_emitter.cc
++++ b/lib/bef_converter/bef_emitter.cc
+@@ -18,6 +18,8 @@
+ 
+ #include "tfrt/bef_converter/bef_emitter.h"
+ 
++#include <cstdint>
++
+ namespace tfrt {
+ 
+ const uint8_t BefEmitter::kDummyByte;
+diff --git a/lib/bef_converter/bef_to_mlir/bef_attr_reader.cc b/lib/bef_converter/bef_to_mlir/bef_attr_reader.cc
+index b57e6d7828d..2bcb26ab9b3 100644
+--- a/lib/bef_converter/bef_to_mlir/bef_attr_reader.cc
++++ b/lib/bef_converter/bef_to_mlir/bef_attr_reader.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "bef_attr_reader.h"
+ 
++#include <cstdint>
++
+ #include "mlir/IR/Attributes.h"
+ #include "mlir/IR/Block.h"
+ #include "mlir/IR/BuiltinAttributes.h"
+diff --git a/lib/bef_converter/bef_to_mlir/bef_attr_reader.h b/lib/bef_converter/bef_to_mlir/bef_attr_reader.h
+index 720afa8c845..fe332428070 100644
+--- a/lib/bef_converter/bef_to_mlir/bef_attr_reader.h
++++ b/lib/bef_converter/bef_to_mlir/bef_attr_reader.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_LIB_BEF_CONVERTER_BEF_TO_MLIR_BEF_ATTR_READER_H_
+ #define TFRT_LIB_BEF_CONVERTER_BEF_TO_MLIR_BEF_ATTR_READER_H_
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/SetVector.h"
+ #include "mlir/IR/Builders.h"
+ #include "mlir/IR/BuiltinOps.h"
+diff --git a/lib/bef_converter/bef_to_mlir/bef_location_reader.h b/lib/bef_converter/bef_to_mlir/bef_location_reader.h
+index 8eb60423d20..0d38b93cbd6 100644
+--- a/lib/bef_converter/bef_to_mlir/bef_location_reader.h
++++ b/lib/bef_converter/bef_to_mlir/bef_location_reader.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_LIB_BEF_CONVERTER_BEF_TO_MLIR_BEF_LOCATION_READER_H_
+ #define TFRT_LIB_BEF_CONVERTER_BEF_TO_MLIR_BEF_LOCATION_READER_H_
+ 
++#include <cstdint>
++
+ #include "mlir/IR/Location.h"
+ #include "mlir/IR/MLIRContext.h"
+ #include "tfrt/bef/bef_location.h"
+diff --git a/lib/bef_converter/bef_to_mlir/bef_to_mlir.cc b/lib/bef_converter/bef_to_mlir/bef_to_mlir.cc
+index e2bb13ab9b9..0f49192d6a0 100644
+--- a/lib/bef_converter/bef_to_mlir/bef_to_mlir.cc
++++ b/lib/bef_converter/bef_to_mlir/bef_to_mlir.cc
+@@ -22,6 +22,7 @@
+ 
+ #include "tfrt/bef_converter/bef_to_mlir.h"
+ 
++#include <cstdint>
+ #include <optional>
+ #include <utility>
+ #include <vector>
+diff --git a/lib/bef_converter/bef_to_mlir/bef_to_mlir_translate.cc b/lib/bef_converter/bef_to_mlir/bef_to_mlir_translate.cc
+index b54332f6e8a..d8cfae347b6 100644
+--- a/lib/bef_converter/bef_to_mlir/bef_to_mlir_translate.cc
++++ b/lib/bef_converter/bef_to_mlir/bef_to_mlir_translate.cc
+@@ -17,6 +17,9 @@
+ // This file implements a mlir translation for the bef-to-mlir converter. It
+ // opens up an BEF file specified on the command line and converts it to a mlir
+ // file at specified location.
++
++#include <cstdint>
++
+ #include "llvm/Support/MemoryBuffer.h"
+ #include "llvm/Support/SourceMgr.h"
+ #include "llvm/Support/raw_ostream.h"
+diff --git a/lib/bef_converter/mlir_to_bef/bef_attr_emitter.cc b/lib/bef_converter/mlir_to_bef/bef_attr_emitter.cc
+index 3d8ef6c42af..20227a52f5c 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_attr_emitter.cc
++++ b/lib/bef_converter/mlir_to_bef/bef_attr_emitter.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "bef_attr_emitter.h"
+ 
++#include <cstdint>
++
+ #include "mlir/IR/Attributes.h"
+ #include "mlir/IR/Block.h"
+ #include "mlir/IR/BuiltinAttributes.h"
+diff --git a/lib/bef_converter/mlir_to_bef/bef_compilation_units.cc b/lib/bef_converter/mlir_to_bef/bef_compilation_units.cc
+index 9abb19de38e..d5ed75863ee 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_compilation_units.cc
++++ b/lib/bef_converter/mlir_to_bef/bef_compilation_units.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "bef_compilation_units.h"
+ 
++#include <cstdint>
+ #include <string>
+ #include <utility>
+ 
+diff --git a/lib/bef_converter/mlir_to_bef/bef_compilation_units.h b/lib/bef_converter/mlir_to_bef/bef_compilation_units.h
+index 23567061e9b..c47ab6ea03f 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_compilation_units.h
++++ b/lib/bef_converter/mlir_to_bef/bef_compilation_units.h
+@@ -17,6 +17,7 @@
+ #ifndef TFRT_LIB_BEF_CONVERTER_MLIR_TO_BEF_BEF_COMPILATION_UNITS_H_
+ #define TFRT_LIB_BEF_CONVERTER_MLIR_TO_BEF_BEF_COMPILATION_UNITS_H_
+ 
++#include <cstdint>
+ #include <string>
+ 
+ #include "mlir/IR/BuiltinOps.h"
+diff --git a/lib/bef_converter/mlir_to_bef/bef_location_emitter.cc b/lib/bef_converter/mlir_to_bef/bef_location_emitter.cc
+index 781e5db9b8f..a21e983d2fb 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_location_emitter.cc
++++ b/lib/bef_converter/mlir_to_bef/bef_location_emitter.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "bef_location_emitter.h"
+ 
++#include <cstdint>
++
+ #include "llvm/Support/Casting.h"
+ #include "mlir/IR/Location.h"
+ #include "mlir/IR/Operation.h"
+diff --git a/lib/bef_converter/mlir_to_bef/bef_location_emitter.h b/lib/bef_converter/mlir_to_bef/bef_location_emitter.h
+index bd3f4b02b6e..8e5adda71ff 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_location_emitter.h
++++ b/lib/bef_converter/mlir_to_bef/bef_location_emitter.h
+@@ -19,6 +19,8 @@
+ #ifndef TFRT_LIB_BEF_CONVERTER_MLIR_TO_BEF_BEF_LOCATION_EMITTER_H_
+ #define TFRT_LIB_BEF_CONVERTER_MLIR_TO_BEF_BEF_LOCATION_EMITTER_H_
+ 
++#include <cstdint>
++
+ #include "bef_string_emitter.h"
+ #include "llvm/ADT/ArrayRef.h"
+ #include "mlir/IR/BuiltinOps.h"
+diff --git a/lib/bef_converter/mlir_to_bef/bef_string_emitter.cc b/lib/bef_converter/mlir_to_bef/bef_string_emitter.cc
+index efca3655ccc..69a842aabae 100644
+--- a/lib/bef_converter/mlir_to_bef/bef_string_emitter.cc
++++ b/lib/bef_converter/mlir_to_bef/bef_string_emitter.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "bef_string_emitter.h"
+ 
++#include <cstdint>
++
+ namespace tfrt {
+ 
+ size_t BefStringEmitter::EmitString(string_view str) {
+diff --git a/lib/bef_converter/mlir_to_bef/mlir_to_bef.cc b/lib/bef_converter/mlir_to_bef/mlir_to_bef.cc
+index bcd8c6df382..a29953bdadf 100644
+--- a/lib/bef_converter/mlir_to_bef/mlir_to_bef.cc
++++ b/lib/bef_converter/mlir_to_bef/mlir_to_bef.cc
+@@ -25,6 +25,7 @@
+ 
+ #include "tfrt/bef_converter/mlir_to_bef.h"
+ 
++#include <cstdint>
+ #include <cstring>
+ #include <optional>
+ 
+diff --git a/lib/bef_executor/bef_file.cc b/lib/bef_executor/bef_file.cc
+index d7250247d6f..b43c899038a 100644
+--- a/lib/bef_executor/bef_file.cc
++++ b/lib/bef_executor/bef_file.cc
+@@ -19,6 +19,7 @@
+ 
+ #include "tfrt/bef_executor/bef_file.h"
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "bef_file_impl.h"
+diff --git a/lib/bef_executor/bef_file_impl.h b/lib/bef_executor/bef_file_impl.h
+index e8678640916..4eb652d01a0 100644
+--- a/lib/bef_executor/bef_file_impl.h
++++ b/lib/bef_executor/bef_file_impl.h
+@@ -19,6 +19,7 @@
+ #ifndef TFRT_LIB_BEF_EXECUTOR_BEF_FILE_IMPL_H_
+ #define TFRT_LIB_BEF_EXECUTOR_BEF_FILE_IMPL_H_
+ 
++#include <cstdint>
+ #include <optional>
+ #include <type_traits>
+ #include <vector>
+diff --git a/lib/compiler/stream_analysis.cc b/lib/compiler/stream_analysis.cc
+index 5d4c70d9aa5..9d1fa3435a2 100644
+--- a/lib/compiler/stream_analysis.cc
++++ b/lib/compiler/stream_analysis.cc
+@@ -18,6 +18,7 @@
+ 
+ #include "tfrt/compiler/stream_analysis.h"
+ 
++#include <cstdint>
+ #include <optional>
+ #include <string>
+ 
+diff --git a/lib/core_runtime/kernels.cc b/lib/core_runtime/kernels.cc
+index be43dbb5569..c8c013373ca 100644
+--- a/lib/core_runtime/kernels.cc
++++ b/lib/core_runtime/kernels.cc
+@@ -17,6 +17,8 @@
+ 
+ #include "tfrt/core_runtime/kernels.h"
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/FunctionExtras.h"
+ #include "llvm/ADT/SmallString.h"
+ #include "tfrt/core_runtime/core_runtime.h"
+diff --git a/lib/core_runtime/logging_op_handler.cc b/lib/core_runtime/logging_op_handler.cc
+index 4c723f41bad..e2b91c9e44e 100644
+--- a/lib/core_runtime/logging_op_handler.cc
++++ b/lib/core_runtime/logging_op_handler.cc
+@@ -31,6 +31,7 @@
+ #include <unistd.h>
+ #endif
+ 
++#include <cstdint>
+ #include <system_error>
+ 
+ #include "llvm/Support/FileSystem.h"
+diff --git a/lib/core_runtime/op_attrs.cc b/lib/core_runtime/op_attrs.cc
+index 9be32dcc324..a75d7b61b91 100644
+--- a/lib/core_runtime/op_attrs.cc
++++ b/lib/core_runtime/op_attrs.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/core_runtime/op_attrs.h"
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/STLExtras.h"
+ #include "llvm/ADT/StringMap.h"
+ #include "llvm/Support/Alignment.h"
+diff --git a/lib/core_runtime/opdefs/core_runtime.cc b/lib/core_runtime/opdefs/core_runtime.cc
+index 5d42c7fc442..a852b38d7ef 100644
+--- a/lib/core_runtime/opdefs/core_runtime.cc
++++ b/lib/core_runtime/opdefs/core_runtime.cc
+@@ -15,6 +15,8 @@
+ // This file implements MLIR operation functions for the core runtime library.
+ #include "tfrt/core_runtime/opdefs/core_runtime.h"
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/STLExtras.h"
+ #include "mlir/Dialect/Func/IR/FuncOps.h"
+ #include "mlir/IR/Attributes.h"
+diff --git a/lib/core_runtime/opdefs/corert_utils.cc b/lib/core_runtime/opdefs/corert_utils.cc
+index fea48de2b34..f798d3a1353 100644
+--- a/lib/core_runtime/opdefs/corert_utils.cc
++++ b/lib/core_runtime/opdefs/corert_utils.cc
+@@ -15,6 +15,8 @@
+ // This file implements MLIR operation functions for the core runtime library.
+ #include "tfrt/core_runtime/opdefs/corert_utils.h"
+ 
++#include <cstdint>
++
+ #include "mlir/IR/Builders.h"
+ #include "tfrt/basic_kernels/opdefs/tfrt_base.h"
+ #include "tfrt/basic_kernels/opdefs/types.h"
+diff --git a/lib/core_runtime/tensor_handle.cc b/lib/core_runtime/tensor_handle.cc
+index 2ebf8bb0fdc..7ffd3673aad 100644
+--- a/lib/core_runtime/tensor_handle.cc
++++ b/lib/core_runtime/tensor_handle.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/core_runtime/tensor_handle.h"
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/host_context/async_dispatch.h"
+ #include "tfrt/host_context/async_value_ref.h"
+diff --git a/lib/io/posix_file_system.cc b/lib/io/posix_file_system.cc
+index 0cf057b7a31..9ca9838ac69 100644
+--- a/lib/io/posix_file_system.cc
++++ b/lib/io/posix_file_system.cc
+@@ -22,6 +22,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ 
++#include <cstdint>
+ #include <limits>
+ 
+ #include "llvm_derived/Support/raw_ostream.h"
+diff --git a/lib/io/windows_file_system.cc b/lib/io/windows_file_system.cc
+index 97e43f21c90..40ece631cb9 100644
+--- a/lib/io/windows_file_system.cc
++++ b/lib/io/windows_file_system.cc
+@@ -21,6 +21,7 @@
+ #include <Windows.h>
+ #include <assert.h>
+ 
++#include <cstdint>
+ #include <limits>
+ 
+ #include "llvm_derived/Support/raw_ostream.h"
+diff --git a/lib/support/crc32c.cc b/lib/support/crc32c.cc
+index 58f2066e02b..4a810ee733e 100644
+--- a/lib/support/crc32c.cc
++++ b/lib/support/crc32c.cc
+@@ -18,6 +18,8 @@
+ 
+ #include "tfrt/support/crc32c.h"
+ 
++#include <cstdint>
++
+ #include "tfrt/support/raw_coding.h"
+ #include "tfrt/support/string_util.h"
+ 
+diff --git a/lib/support/hash_util.cc b/lib/support/hash_util.cc
+index eee2cd0b0fb..996a7085690 100644
+--- a/lib/support/hash_util.cc
++++ b/lib/support/hash_util.cc
+@@ -17,6 +17,8 @@
+ // This file defines C++ utility functions for hashing
+ #include "tfrt/support/hash_util.h"
+ 
++#include <cstdint>
++
+ #include "tfrt/support/byte_order.h"
+ 
+ namespace tfrt {
+diff --git a/lib/support/logging.cc b/lib/support/logging.cc
+index 0ecc1425664..c40518c4f66 100644
+--- a/lib/support/logging.cc
++++ b/lib/support/logging.cc
+@@ -17,6 +17,7 @@
+ #include "tfrt/support/logging.h"
+ 
+ #include <chrono>
++#include <cstdint>
+ #include <sstream>
+ #include <thread>
+ 
+diff --git a/lib/support/random_util.cc b/lib/support/random_util.cc
+index 2b0877a8909..da6c4da7d05 100644
+--- a/lib/support/random_util.cc
++++ b/lib/support/random_util.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/support/random_util.h"
+ 
++#include <cstdint>
+ #include <mutex>
+ #include <random>
+ 
+diff --git a/lib/support/string_util.cc b/lib/support/string_util.cc
+index f35c719c6cc..080942e401c 100644
+--- a/lib/support/string_util.cc
++++ b/lib/support/string_util.cc
+@@ -19,6 +19,8 @@ limitations under the License.
+ // Based on tensorflow/core/platform/numbers.cc
+ #include "tfrt/support/string_util.h"
+ 
++#include <cstdint>
++
+ #include "llvm/Support/Format.h"
+ #include "llvm/Support/raw_ostream.h"
+ 
+diff --git a/lib/tensor/btf.cc b/lib/tensor/btf.cc
+index 1ac9f6c1297..e4d2663658e 100644
+--- a/lib/tensor/btf.cc
++++ b/lib/tensor/btf.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/tensor/btf.h"
+ 
++#include <cstdint>
++
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/support/error_util.h"
+ 
+diff --git a/lib/tensor/btf_util.cc b/lib/tensor/btf_util.cc
+index d78bc7cb1b3..da516ca0be3 100644
+--- a/lib/tensor/btf_util.cc
++++ b/lib/tensor/btf_util.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/tensor/btf_util.h"
+ 
++#include <cstdint>
+ #include <iostream>
+ 
+ namespace tfrt {
+diff --git a/lib/tensor/coo_host_tensor.cc b/lib/tensor/coo_host_tensor.cc
+index 52bcdffd9bb..fd35221c6e2 100644
+--- a/lib/tensor/coo_host_tensor.cc
++++ b/lib/tensor/coo_host_tensor.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/tensor/coo_host_tensor.h"
+ 
++#include <cstdint>
++
+ #include "llvm/ADT/STLExtras.h"
+ #include "llvm/Support/raw_ostream.h"
+ #include "tfrt/dtype/dtype_formatter.h"
+diff --git a/lib/tensor/coo_host_tensor_kernels.cc b/lib/tensor/coo_host_tensor_kernels.cc
+index 5d0f07faf17..45e12ff77b3 100644
+--- a/lib/tensor/coo_host_tensor_kernels.cc
++++ b/lib/tensor/coo_host_tensor_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file defines the kernels for COO sparse host tensors.
+ 
++#include <cstdint>
++
+ #include "tfrt/host_context/kernel_utils.h"
+ #include "tfrt/tensor/coo_host_tensor.h"
+ #include "tfrt/tensor/dense_tensor_utils.h"
+diff --git a/lib/tensor/dense_host_tensor.cc b/lib/tensor/dense_host_tensor.cc
+index 88a898bc6d4..506e6b43931 100644
+--- a/lib/tensor/dense_host_tensor.cc
++++ b/lib/tensor/dense_host_tensor.cc
+@@ -17,6 +17,7 @@
+ #include "tfrt/tensor/dense_host_tensor.h"
+ 
+ #include <cstddef>
++#include <cstdint>
+ #include <cstring>
+ #include <optional>
+ #include <utility>
+diff --git a/lib/tensor/dense_host_tensor_kernels.cc b/lib/tensor/dense_host_tensor_kernels.cc
+index f2c748415f6..8ac5221204e 100644
+--- a/lib/tensor/dense_host_tensor_kernels.cc
++++ b/lib/tensor/dense_host_tensor_kernels.cc
+@@ -18,6 +18,7 @@
+ 
+ #include <algorithm>
+ #include <complex>
++#include <cstdint>
+ 
+ #include "llvm/ADT/STLExtras.h"
+ #include "llvm/Support/raw_ostream.h"
+diff --git a/lib/tensor/scalar_host_tensor.cc b/lib/tensor/scalar_host_tensor.cc
+index f7cbb345c53..4042497287b 100644
+--- a/lib/tensor/scalar_host_tensor.cc
++++ b/lib/tensor/scalar_host_tensor.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/tensor/scalar_host_tensor.h"
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "llvm/Support/raw_ostream.h"
+diff --git a/lib/tensor/tensor_serialize_utils.cc b/lib/tensor/tensor_serialize_utils.cc
+index ddaa7b1bc76..9b456f2b22b 100644
+--- a/lib/tensor/tensor_serialize_utils.cc
++++ b/lib/tensor/tensor_serialize_utils.cc
+@@ -17,6 +17,8 @@
+ 
+ #include "tfrt/tensor/tensor_serialize_utils.h"
+ 
++#include <cstdint>
++
+ #include "tfrt/bef_converter/bef_attr_encoder.h"
+ #include "tfrt/dtype/dtype.h"
+ #include "tfrt/host_context/attribute_utils.h"
+diff --git a/lib/tensor/tensor_shape.cc b/lib/tensor/tensor_shape.cc
+index 4af69866ece..ad720a57c12 100644
+--- a/lib/tensor/tensor_shape.cc
++++ b/lib/tensor/tensor_shape.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/tensor/tensor_shape.h"
+ 
++#include <cstdint>
+ #include <optional>
+ 
+ #include "llvm/ADT/SmallVector.h"
+diff --git a/lib/tensor/tensor_type_registration.cc b/lib/tensor/tensor_type_registration.cc
+index 424843ef010..88c3ebf8537 100644
+--- a/lib/tensor/tensor_type_registration.cc
++++ b/lib/tensor/tensor_type_registration.cc
+@@ -16,6 +16,7 @@
+ 
+ #include "tfrt/tensor/tensor_type_registration.h"
+ 
++#include <cstdint>
+ #include <limits>
+ #include <tuple>
+ 
+diff --git a/lib/test_kernels/async_kernels.cc b/lib/test_kernels/async_kernels.cc
+index 7b61ed6aa73..81f5b01e99b 100644
+--- a/lib/test_kernels/async_kernels.cc
++++ b/lib/test_kernels/async_kernels.cc
+@@ -16,6 +16,7 @@
+ // testing.
+ 
+ #include <chrono>
++#include <cstdint>
+ #include <random>
+ #include <thread>
+ 
+diff --git a/lib/test_kernels/async_test_kernels.cc b/lib/test_kernels/async_test_kernels.cc
+index 2c5efa613c4..7ef116fd32e 100644
+--- a/lib/test_kernels/async_test_kernels.cc
++++ b/lib/test_kernels/async_test_kernels.cc
+@@ -14,6 +14,7 @@
+ 
+ // This library contains test kernels needed by example_kernels unit tests.
+ 
++#include <cstdint>
+ #include <thread>
+ 
+ #include "llvm/ADT/FunctionExtras.h"
+diff --git a/lib/test_kernels/atomic_test_kernels.cc b/lib/test_kernels/atomic_test_kernels.cc
+index d8bc932eed2..d2589caa39f 100644
+--- a/lib/test_kernels/atomic_test_kernels.cc
++++ b/lib/test_kernels/atomic_test_kernels.cc
+@@ -16,6 +16,7 @@
+ // concurrency situations.
+ 
+ #include <atomic>
++#include <cstdint>
+ 
+ #include "tfrt/host_context/kernel_utils.h"
+ #include "tfrt/test_kernels.h"
+diff --git a/lib/test_kernels/benchmark_kernels.cc b/lib/test_kernels/benchmark_kernels.cc
+index e8e481bc86d..3cdfe611129 100644
+--- a/lib/test_kernels/benchmark_kernels.cc
++++ b/lib/test_kernels/benchmark_kernels.cc
+@@ -16,6 +16,7 @@
+ 
+ #include <cassert>
+ #include <chrono>
++#include <cstdint>
+ #include <ctime>
+ 
+ #include "llvm/ADT/FunctionExtras.h"
+diff --git a/lib/test_kernels/simple_kernels.cc b/lib/test_kernels/simple_kernels.cc
+index 3d9b3ea4ddc..4aca5d8d500 100644
+--- a/lib/test_kernels/simple_kernels.cc
++++ b/lib/test_kernels/simple_kernels.cc
+@@ -14,6 +14,7 @@
+ 
+ // This file implements a few simple classes of synchronous kernels for testing.
+ 
++#include <cstdint>
+ #include <fstream>
+ #include <iterator>
+ #include <random>
+diff --git a/lib/test_kernels/simple_test_kernels.cc b/lib/test_kernels/simple_test_kernels.cc
+index 08dcd4ca57e..d43cc677cc5 100644
+--- a/lib/test_kernels/simple_test_kernels.cc
++++ b/lib/test_kernels/simple_test_kernels.cc
+@@ -14,6 +14,8 @@
+ 
+ // This library contains test kernels needed by example_kernels unit tests.
+ 
++#include <cstdint>
++
+ #include "llvm_derived/Support/raw_ostream.h"
+ #include "tfrt/bef_executor/function_util.h"
+ #include "tfrt/host_context/async_dispatch.h"
+diff --git a/lib/test_kernels/test_native_functions.cc b/lib/test_kernels/test_native_functions.cc
+index 013ff271a81..ce069799c10 100644
+--- a/lib/test_kernels/test_native_functions.cc
++++ b/lib/test_kernels/test_native_functions.cc
+@@ -14,6 +14,8 @@
+ 
+ // This file implements a few native functions for testing.
+ 
++#include <cstdint>
++
+ #include "tfrt/host_context/async_dispatch.h"
+ #include "tfrt/host_context/chain.h"
+ #include "tfrt/host_context/host_context.h"
+diff --git a/lib/test_kernels/tutorial_kernels.cc b/lib/test_kernels/tutorial_kernels.cc
+index 8c8510bcb4a..ab52c813b4a 100644
+--- a/lib/test_kernels/tutorial_kernels.cc
++++ b/lib/test_kernels/tutorial_kernels.cc
+@@ -14,6 +14,7 @@
+ 
+ // Sample kernels defined in tutorial.md, added here for testing.
+ 
++#include <cstdint>
+ #include <cstdio>
+ 
+ #include "tfrt/host_context/chain.h"
+diff --git a/lib/utils/kernel_runner.cc b/lib/utils/kernel_runner.cc
+index 03233e2c988..a74e21625c8 100644
+--- a/lib/utils/kernel_runner.cc
++++ b/lib/utils/kernel_runner.cc
+@@ -15,6 +15,7 @@
+ #include "tfrt/utils/kernel_runner.h"
+ 
+ #include <cstddef>
++#include <cstdint>
+ #include <cstring>
+ #include <type_traits>
+ #include <utility>
+diff --git a/mlir_tests/benchmarks/basic_benchmark_test.cc b/mlir_tests/benchmarks/basic_benchmark_test.cc
+index 6ddd3660bd3..e66dc77cb34 100644
+--- a/mlir_tests/benchmarks/basic_benchmark_test.cc
++++ b/mlir_tests/benchmarks/basic_benchmark_test.cc
+@@ -14,6 +14,8 @@
+  * limitations under the License.
+  */
+ 
++#include <cstdint>
++
+ #include "benchmark/benchmark.h"
+ #include "gmock/gmock.h"
+ #include "gtest/gtest.h"
+diff --git a/mlir_tests/mlir_runner_util_test.cc b/mlir_tests/mlir_runner_util_test.cc
+index 70907b558fe..96494e81e7c 100644
+--- a/mlir_tests/mlir_runner_util_test.cc
++++ b/mlir_tests/mlir_runner_util_test.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "tfrt/utils/mlir_runner_util.h"
+ 
++#include <cstdint>
++
+ #include "gtest/gtest.h"
+ #include "mlir/Dialect/Func/IR/FuncOps.h"
+ #include "tfrt/basic_kernels/opdefs/tfrt_base.h"
+diff --git a/third_party/concurrent_work_queue/cpp_tests/multi_threaded_work_queue_test.cc b/third_party/concurrent_work_queue/cpp_tests/multi_threaded_work_queue_test.cc
+index ed1904fdbc4..86c2ade1a30 100644
+--- a/third_party/concurrent_work_queue/cpp_tests/multi_threaded_work_queue_test.cc
++++ b/third_party/concurrent_work_queue/cpp_tests/multi_threaded_work_queue_test.cc
+@@ -5,6 +5,7 @@
+ // Unit tests and benchmarks for MultiThreadedWorkQueue.
+ 
+ #include <atomic>
++#include <cstdint>
+ 
+ #include "gtest/gtest.h"
+ #include "tfrt/host_context/async_dispatch.h"
+diff --git a/third_party/concurrent_work_queue/lib/event_count.h b/third_party/concurrent_work_queue/lib/event_count.h
+index 3b787bbc78a..ae1c8782d8d 100644
+--- a/third_party/concurrent_work_queue/lib/event_count.h
++++ b/third_party/concurrent_work_queue/lib/event_count.h
+@@ -52,6 +52,7 @@
+ 
+ #include <atomic>
+ #include <cassert>
++#include <cstdint>
+ #include <vector>
+ 
+ #include "tfrt/support/alloc.h"
+diff --git a/third_party/concurrent_work_queue/lib/task_queue.h b/third_party/concurrent_work_queue/lib/task_queue.h
+index 9f0cfc5f9e5..6019580d894 100644
+--- a/third_party/concurrent_work_queue/lib/task_queue.h
++++ b/third_party/concurrent_work_queue/lib/task_queue.h
+@@ -26,6 +26,7 @@
+ 
+ #include <array>
+ #include <atomic>
++#include <cstdint>
+ #include <limits>
+ #include <optional>
+ 
+diff --git a/third_party/concurrent_work_queue/lib/work_queue_base.h b/third_party/concurrent_work_queue/lib/work_queue_base.h
+index 08c33eaea5a..98bb017e966 100644
+--- a/third_party/concurrent_work_queue/lib/work_queue_base.h
++++ b/third_party/concurrent_work_queue/lib/work_queue_base.h
+@@ -50,6 +50,7 @@
+ #define TFRT_THIRD_PARTY_CONCURRENT_WORK_QUEUE_WORK_QUEUE_BASE_H_
+ 
+ #include <atomic>
++#include <cstdint>
+ #include <memory>
+ #include <optional>
+ #include <string>
+diff --git a/third_party/llvm_derived/lib/Support/raw_ostream.cpp b/third_party/llvm_derived/lib/Support/raw_ostream.cpp
+index 9eebbaa1fe7..1c3639ab5eb 100644
+--- a/third_party/llvm_derived/lib/Support/raw_ostream.cpp
++++ b/third_party/llvm_derived/lib/Support/raw_ostream.cpp
+@@ -42,6 +42,7 @@
+ #include <algorithm>
+ #include <cctype>
+ #include <cerrno>
++#include <cstdint>
+ #include <cstdio>
+ #include <iterator>
+ #include <system_error>
+diff --git a/tools/btf_info_tool/main.cc b/tools/btf_info_tool/main.cc
+index 1ecf02fbf17..4927bee2d9b 100644
+--- a/tools/btf_info_tool/main.cc
++++ b/tools/btf_info_tool/main.cc
+@@ -23,6 +23,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ 
++#include <cstdint>
+ #include <iostream>
+ #include <optional>
+ 
+diff --git a/tools/code_size_test_app/main.cc b/tools/code_size_test_app/main.cc
+index 3565dad032d..b6ecd8ad8d1 100644
+--- a/tools/code_size_test_app/main.cc
++++ b/tools/code_size_test_app/main.cc
+@@ -18,6 +18,7 @@
+ // simplest core components to run a fibonacci computation. It is used to track
+ // the code size of a deployed binary on mobile environment.
+ 
++#include <cstdint>
+ #include <cstdio>
+ 
+ #include "tfrt/basic_kernels/basic_kernels.h"
